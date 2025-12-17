@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: white;
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .project-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            background: #f0f0f0;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            color: #555;
+        }
+
+        .project-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-link:hover {
+            opacity: 0.9;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            opacity: 0.9;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .add-project-btn {
+            background: rgba(255,255,255,0.2);
+            border: 2px dashed rgba(255,255,255,0.5);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-project-btn:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.8);
+        }
+
+        .add-icon {
+            font-size: 4em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 My Portfolio</h1>
+            <p class="subtitle">코딩 프로젝트 모음</p>
+        </header>
+
+        <div class="projects-grid" id="projectsGrid">
+            <!-- 프로젝트 카드 예시 1 -->
+            <div class="project-card" onclick="window.open('https://your-project-1.github.io', '_blank')">
+                <div class="project-image">🎮</div>
+                <div class="project-content">
+                    <h2 class="project-title">프로젝트 1</h2>
+                    <p class="project-description">
+                        이 프로젝트에 대한 간단한 설명을 여기에 작성하세요.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                    </div>
+                    <a href="https://your-project-1.github.io" class="project-link" onclick="event.stopPropagation()">
+                        사이트 방문 →
+                    </a>
+                </div>
+            </div>
+
+            <!-- 프로젝트 카드 예시 2 -->
+            <div class="project-card" onclick="window.open('https://your-project-2.github.io', '_blank')">
+                <div class="project-image">📱</div>
+                <div class="project-content">
+                    <h2 class="project-title">프로젝트 2</h2>
+                    <p class="project-description">
+                        두 번째 프로젝트에 대한 설명을 작성하세요.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">TypeScript</span>
+                    </div>
+                    <a href="https://your-project-2.github.io" class="project-link" onclick="event.stopPropagation()">
+                        사이트 방문 →
+                    </a>
+                </div>
+            </div>
+
+            <!-- 프로젝트 카드 예시 3 -->
+            <div class="project-card" onclick="window.open('https://your-project-3.github.io', '_blank')">
+                <div class="project-image">🎨</div>
+                <div class="project-content">
+                    <h2 class="project-title">프로젝트 3</h2>
+                    <p class="project-description">
+                        세 번째 프로젝트 설명입니다.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Vue.js</span>
+                        <span class="tag">CSS3</span>
+                    </div>
+                    <a href="https://your-project-3.github.io" class="project-link" onclick="event.stopPropagation()">
+                        사이트 방문 →
+                    </a>
+                </div>
+            </div>
+
+            <!-- 프로젝트 추가 안내 -->
+            <div class="add-project-btn">
+                <div>
+                    <div class="add-icon">+</div>
+                    <p>HTML 코드를 수정해서<br>프로젝트를 추가하세요</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2024 My Portfolio | <a href="https://github.com/your-username" target="_blank">GitHub</a></p>
+        </footer>
+    </div>
+</body>
+</html>
