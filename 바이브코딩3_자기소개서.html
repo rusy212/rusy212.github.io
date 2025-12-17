@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김민수 - 소프트웨어 개발자</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+            background-color: #0d0d0d;
+            color: #a8a8a8;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px 0;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #d4d4d4;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 100px;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 100px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Profile Image */
+        .profile-image-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ffffff;
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 50px rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-upload {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            overflow: hidden;
+            border: 4px solid #ffffff;
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-upload:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 50px rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-upload svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        h1 {
+            font-size: 70px;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 50px;
+            color: #c4c4c4;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 2px;
+            background-color: #ffffff;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #2a2a2a;
+        }
+
+        .highlight {
+            color: #ffffff;
+        }
+
+        .intro-text {
+            font-size: 18px;
+            max-width: 700px;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.3s;
+            margin-top: 30px;
+        }
+
+        .cta-button:hover {
+            background-color: #ffffff;
+            color: #0d0d0d;
+            transform: translateY(-3px);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .skill-item::before {
+            content: '▹';
+            color: #ffffff;
+            font-size: 18px;
+        }
+
+        .philosophy-box {
+            background-color: #1a1a1a;
+            border-left: 3px solid #ffffff;
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        /* Experience Section */
+        .experience-item {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-5px);
+            background-color: #242424;
+        }
+
+        .experience-title {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .experience-subtitle {
+            color: #d4d4d4;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .experience-desc {
+            line-height: 1.8;
+        }
+
+        /* Strengths */
+        .strengths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .strength-card {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .strength-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -15px rgba(255, 255, 255, 0.3);
+            background-color: #242424;
+        }
+
+        .strength-card h3 {
+            color: #ffffff;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .weakness {
+            background-color: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 30px;
+        }
+
+        /* Contact */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-content h2 {
+            font-size: 60px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 40px; }
+            h2 { font-size: 30px; }
+            .section-title { font-size: 24px; }
+            .about-content { grid-template-columns: 1fr; }
+            nav ul { gap: 15px; }
+            .container { padding: 0 25px; }
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+            .profile-upload {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">KMS</div>
+            <ul>
+                <li><a href="#about">소개</a></li>
+                <li><a href="#motivation">동기</a></li>
+                <li><a href="#experience">경험</a></li>
+                <li><a href="#strength">강점</a></li>
+                <li><a href="#contact">연락</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section id="hero" class="container">
+            <div class="profile-image-container">
+                <div class="profile-upload" id="profileUpload">
+                    <svg class="profile-image" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Background circle -->
+                        <circle cx="100" cy="100" r="100" fill="#2a2a2a"/>
+                        
+                        <!-- Face -->
+                        <circle cx="100" cy="85" r="45" fill="#d4a574"/>
+                        
+                        <!-- Hair -->
+                        <path d="M 55 70 Q 55 40 100 35 Q 145 40 145 70 Q 145 50 130 45 Q 115 40 100 40 Q 85 40 70 45 Q 55 50 55 70 Z" fill="#1a1a1a"/>
+                        
+                        <!-- Eyes -->
+                        <circle cx="85" cy="80" r="4" fill="#1a1a1a"/>
+                        <circle cx="115" cy="80" r="4" fill="#1a1a1a"/>
+                        
+                        <!-- Eyebrows -->
+                        <path d="M 78 72 Q 85 70 92 72" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        <path d="M 108 72 Q 115 70 122 72" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        
+                        <!-- Nose -->
+                        <path d="M 100 85 L 95 95 L 100 97" stroke="#c49464" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                        
+                        <!-- Mouth -->
+                        <path d="M 90 105 Q 100 110 110 105" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        
+                        <!-- Neck/Shoulders -->
+                        <ellipse cx="100" cy="145" rx="50" ry="35" fill="#5a5a5a"/>
+                        
+                        <!-- Shirt collar -->
+                        <path d="M 70 140 L 85 155 L 100 145 L 115 155 L 130 140" stroke="#3a3a3a" stroke-width="3" fill="none"/>
+                    </svg>
+                    <input type="file" id="profileInput" accept="image/*" style="display: none;">
+                </div>
+            </div>
+            <p style="color: #d4d4d4; margin-bottom: 20px;">안녕하세요, 저는</p>
+            <h1>김민수입니다.</h1>
+            <h2>사용자를 위한 가치를 만듭니다.</h2>
+            <p class="intro-text">
+                소프트웨어 개발자로서 사용자에게 가치 있는 서비스를 제공하는 것을 목표로 합니다. 
+                2년간의 웹 개발 경험을 바탕으로 빠르게 변화하는 IT 업계에서 
+                새로운 기술을 학습하고 적용하는 것에 큰 흥미를 느끼고 있습니다.
+            </p>
+            <a href="#contact" class="cta-button">연락하기</a>
+        </section>
+
+        <section id="about" class="container">
+            <h2 class="section-title">자기소개</h2>
+            <div class="about-content">
+                <div>
+                    <p style="margin-bottom: 20px;">
+                        저는 컴퓨터공학을 전공하며 프로그래밍의 기초를 다졌고, 
+                        졸업 후 2년간 스타트업에서 웹 개발 업무를 담당했습니다.
+                    </p>
+                    <p style="margin-bottom: 20px;">
+                        특히 사용자 경험을 개선하는 기술적 솔루션을 찾는 것을 좋아하며, 
+                        복잡한 문제를 해결하고 팀과 협업하는 과정에서 큰 보람을 느낍니다.
+                    </p>
+                    
+                    <div class="philosophy-box" style="margin-top: 30px;">
+                        <h3 style="color: #ffffff; margin-bottom: 15px;">생활신조</h3>
+                        <p style="font-size: 20px; color: #ffffff; font-weight: 600; margin-bottom: 10px;">
+                            "기술은 사람을 위해 존재한다"
+                        </p>
+                        <p>
+                            개발자로서 항상 사용자의 관점에서 생각하려 노력합니다. 
+                            사용자가 더 편리하고 효율적으로 업무를 처리할 수 있도록 
+                            돕는 것이 개발자의 사명이라고 믿습니다.
+                        </p>
+                    </div>
+
+                    <div style="margin-top: 30px;">
+                        <h3 style="color: #ffffff; margin-bottom: 15px;">주요 기술</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">React Native</div>
+                            <div class="skill-item">웹 개발</div>
+                            <div class="skill-item">백엔드 API</div>
+                            <div class="skill-item">프론트엔드</div>
+                            <div class="skill-item">풀스택 개발</div>
+                            <div class="skill-item">클라우드 기술</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="motivation" class="container">
+            <h2 class="section-title">지원 동기 및 포부</h2>
+            <div class="experience-item">
+                <h3 class="experience-title">지원 동기</h3>
+                <p class="experience-desc">
+                    빠르게 변화하는 IT 업계에서 새로운 기술을 학습하고 적용하는 것에 큰 흥미를 느끼며, 
+                    특히 사용자 경험을 개선하는 기술적 솔루션을 찾는 것을 좋아합니다. 
+                    혁신적인 기술력과 우수한 개발 문화로 업계에서 인정받고 있는 환경에서 
+                    저의 기술적 역량을 더욱 발전시키고 의미 있는 프로젝트에 기여하고 싶습니다.
+                </p>
+            </div>
+
+            <div class="experience-item">
+                <h3 class="experience-title">단기 목표</h3>
+                <p class="experience-desc">
+                    입사 후에는 먼저 개발 문화와 코딩 컨벤션에 빠르게 적응하여 팀의 일원으로서 역할을 다하겠습니다. 
+                    맡은 업무를 성실히 수행하면서 비즈니스 도메인에 대한 이해도를 높이고, 
+                    기존 팀원들과의 협업을 통해 개발 실력을 향상시키겠습니다.
+                </p>
+            </div>
+
+            <div class="experience-item">
+                <h3 class="experience-title">장기 비전</h3>
+                <p class="experience-desc">
+                    중장기적으로는 기술 리더로 성장하여 주니어 개발자들을 멘토링하고, 
+                    새로운 기술 도입과 개발 프로세스 개선에 기여하고 싶습니다. 
+                    특히 클라우드 기술과 마이크로서비스 아키텍처에 대한 전문성을 쌓아 
+                    서비스의 확장성과 안정성 향상에 기여하겠습니다.
+                </p>
+            </div>
+        </section>
+
+        <section id="experience" class="container">
+            <h2 class="section-title">경험 및 프로젝트</h2>
+            
+            <div class="experience-item">
+                <h3 class="experience-title">스타트업 웹 개발자</h3>
+                <p class="experience-subtitle">2년간 근무</p>
+                <p class="experience-desc">
+                    스타트업에서 웹 개발 업무를 담당하며 빠른 개발 환경에서 다양한 프로젝트를 경험했습니다. 
+                    사용자 피드백을 빠르게 반영하고 서비스를 개선하는 과정에서 
+                    애자일 개발 방법론을 익히고 실전 경험을 쌓았습니다.
+                </p>
+            </div>
+
+            <div class="experience-item">
+                <h3 class="experience-title">지역 상권 활성화 앱 개발</h3>
+                <p class="experience-subtitle">교내 해커톤 우수상 수상</p>
+                <p class="experience-desc">
+                    대학교 3학년 때 교내 해커톤에서 팀장을 맡아 5명의 팀원과 함께 48시간 동안 
+                    React Native로 모바일 앱을 완성했습니다. 백엔드 API 설계부터 프론트엔드 구현까지 
+                    전 과정에 참여하면서 풀스택 개발 경험을 쌓았고, 짧은 시간 내에 팀원들의 역량을 파악하고 
+                    업무를 효율적으로 분배하는 리더십을 발휘했습니다.
+                </p>
+            </div>
+
+            <div class="experience-item">
+                <h3 class="experience-title">프로그래밍 멘토링</h3>
+                <p class="experience-subtitle">컴퓨터공학과 학회 활동 (4년간)</p>
+                <p class="experience-desc">
+                    대학교 4년간 컴퓨터공학과 학회에서 활동하며 후배들에게 프로그래밍을 가르치는 
+                    멘토링을 진행했습니다. 복잡한 개념을 쉽게 설명하는 능력을 기를 수 있었고, 
+                    이는 현재 팀 내에서 코드 리뷰와 기술 공유를 할 때 큰 도움이 되고 있습니다.
+                </p>
+            </div>
+        </section>
+
+        <section id="strength" class="container">
+            <h2 class="section-title">성격의 장단점</h2>
+            
+            <h3 style="color: #ffffff; font-size: 24px; margin-bottom: 30px;">강점</h3>
+            <div class="strengths-grid">
+                <div class="strength-card">
+                    <h3>🚀 꾸준한 학습 의지</h3>
+                    <p>
+                        새로운 기술 트렌드에 관심이 많아 개인 시간을 활용해 온라인 강의를 수강하고 
+                        사이드 프로젝트를 진행합니다. 빠르게 변화하는 기술 환경에 적응하고 
+                        지속적으로 성장하려 노력합니다.
+                    </p>
+                </div>
+
+                <div class="strength-card">
+                    <h3>🤝 협업과 소통</h3>
+                    <p>
+                        팀 프로젝트에서 다른 개발자, 디자이너, 기획자와 원활히 소통하며 
+                        공동의 목표를 달성하는 것을 중요하게 생각합니다. 
+                        서로 다른 배경을 가진 팀원들과 효과적으로 협업할 수 있습니다.
+                    </p>
+                </div>
+
+                <div class="strength-card">
+                    <h3>🔍 문제 해결 지향적</h3>
+                    <p>
+                        복잡한 버그나 기술적 이슈에 직면했을 때 포기하지 않고 
+                        다양한 접근 방법을 시도하여 해결책을 찾습니다. 
+                        어려운 문제일수록 더 큰 동기부여를 받아 해결에 몰입합니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="weakness">
+                <h3 style="color: #ffffff; font-size: 20px; margin-bottom: 15px;">개선 중인 부분</h3>
+                <p style="margin-bottom: 10px;">
+                    <strong style="color: #ffffff;">완벽주의 성향:</strong> 
+                    때로는 코드의 완성도에 지나치게 집착하여 일정에 영향을 줄 수 있습니다.
+                </p>
+                <p style="color: #a8a8a8;">
+                    이를 개선하기 위해 우선순위를 명확히 하고 적정 수준의 완성도를 목표로 하는 연습을 하고 있습니다. 
+                    완벽함보다는 실용성과 일정 준수의 균형을 맞추려 노력하고 있습니다.
+                </p>
+            </div>
+        </section>
+
+        <section id="contact" class="container">
+            <div class="contact-content">
+                <p style="color: #d4d4d4; margin-bottom: 20px; font-size: 16px;">다음 단계</p>
+                <h2>함께 일하고 싶으신가요?</h2>
+                <p class="intro-text" style="margin: 20px auto 40px;">
+                    새로운 프로젝트나 기회에 대해 이야기 나누고 싶으시다면 언제든 연락 주세요. 
+                    항상 열린 마음으로 대화할 준비가 되어 있습니다.
+                </p>
+                <a href="mailto:your.email@example.com" class="cta-button">이메일 보내기</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Profile image upload
+        const profileInput = document.getElementById('profileInput');
+        const profileUpload = document.getElementById('profileUpload');
+
+        profileUpload.addEventListener('click', function() {
+            profileInput.click();
+        });
+
+        profileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = document.createElement('img');
+                    img.src = event.target.result;
+                    img.className = 'profile-image';
+                    img.alt = 'Profile';
+                    
+                    profileUpload.innerHTML = '';
+                    profileUpload.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Nav background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.boxShadow = '0 10px 30px -10px rgba(0, 0, 0, 0.7)';
+            } else {
+                nav.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
